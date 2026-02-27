@@ -1,0 +1,38 @@
+{
+  "name": "ionic-todo-app",
+  "version": "1.0.0",
+  "description": "To-Do List App con Ionic + Angular + Firebase Remote Config",
+  "scripts": {
+    "ng":         "ng",
+    "start":      "ng serve",
+    "build":      "ng build",
+    "build:prod": "ng build --configuration production",
+    "test":       "ng test",
+    "lint":       "ng lint"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common":               "^16.2.0",
+    "@angular/compiler":             "^16.2.0",
+    "@angular/core":                 "^16.2.0",
+    "@angular/forms":                "^16.2.0",
+    "@angular/platform-browser":     "^16.2.0",
+    "@angular/platform-browser-dynamic": "^16.2.0",
+    "@angular/router":               "^16.2.0",
+    "@capacitor/android":            "^5.0.0",
+    "@capacitor/core":               "^5.0.0",
+    "@capacitor/ios":                "^5.0.0",
+    "@ionic/angular":                "^7.2.0",
+    "firebase":                      "^10.3.0",
+    "ionicons":                      "^7.0.0",
+    "rxjs":                          "~7.8.0",
+    "tslib":                         "^2.6.0",
+    "zone.js":                       "~0.13.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular":  "^16.2.0",
+    "@angular/cli":                   "^16.2.0",
+    "@angular/compiler-cli":          "^16.2.0",
+    "typescript":                     "~5.1.0"
+  }
+}

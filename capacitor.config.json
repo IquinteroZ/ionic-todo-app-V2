@@ -1,0 +1,8 @@
+{
+  "appId": "com.empresa.todoist",
+  "appName": "TodoApp",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

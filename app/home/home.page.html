@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>📝 Mis Tareas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/categories">
+        <ion-icon slot="icon-only" name="pricetags-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- Estadísticas (feature flag) -->
+  <div class="stats-bar" *ngIf="showStatistics">
+    <ion-chip color="primary">Total: {{ totalTasks }}</ion-chip>
+    <ion-chip color="success">✓ {{ completedTasks }}</ion-chip>
+    <ion-chip color="warning">⏳ {{ pendingTasks }}</ion-chip>
+  </div>
+
+  <!-- Filtro por categoría -->
+  <div class="category-filter">
+    <ion-chip
+      [color]="selectedCatId === 'all' ? 'primary' : 'medium'"
+      (click)="filterByCategory('all')">
+      Todas
+    </ion-chip>
+    <ion-chip
+      *ngFor="let cat of categories"
+      [color]="selectedCatId === cat.id ? 'primary' : 'medium'"
+      (click)="filterByCategory(cat.id)">
+      {{ cat.name }}
+    </ion-chip>
+  </div>
+
+  <!-- Lista de tareas -->
+  <ion-list *ngIf="filteredTasks.length > 0; else emptyState">
+    <ion-item-sliding *ngFor="let task of filteredTasks; trackBy: trackByTaskId">
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteTask(task)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item [class.completed]="task.completed">
+        <ion-checkbox
+          slot="start"
+          [checked]="task.completed"
+          (ionChange)="toggleTask(task)">
+        </ion-checkbox>
+        <ion-label>
+          <h2>{{ task.title }}</h2>
+          <p *ngIf="task.description">{{ task.description }}</p>
+          <ion-badge
+            class="cat-badge"
+            *ngIf="getCategoryById(task.categoryId) as cat"
+            [style.background]="cat.color">
+            {{ cat.name }}
+          </ion-badge>
+        </ion-label>
+      </ion-item>
+
+    </ion-item-sliding>
+  </ion-list>
+
+  <!-- Estado vacío -->
+  <ng-template #emptyState>
+    <div class="empty-state">
+      <ion-icon name="clipboard-outline"></ion-icon>
+      <p>No hay tareas todavía.<br/>¡Toca el + para agregar una!</p>
+    </div>
+  </ng-template>
+
+  <!-- Botón agregar -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="openAddTaskModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
